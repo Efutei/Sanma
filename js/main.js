@@ -2,13 +2,13 @@ enchant();
 window.onload = function() {
 	var game_ = new Game(320,320);
 	game_.fps = 24;
-	game_.preload('http://jsrun.it/assets/K/K/W/1/KKW1x.png',
-                  'http://jsrun.it/assets/w/5/r/1/w5r1o.png',
-                  'http://jsrun.it/assets/I/a/3/r/Ia3rl.png',
-                  'http://jsrun.it/assets/Q/G/q/U/QGqUE.png',
-                  'http://jsrun.it/assets/c/6/j/W/c6jWn.png',
-                  'http://jsrun.it/assets/S/q/Z/Z/SqZZt.png',
-                  'http://jsrun.it/assets/u/F/l/T/uFlTJ.png');
+	game_.preload('./img/gauge2.png',
+                  './img/glass.png',
+                  './img/jack.png',
+                  './img/red.png',
+                  './img/sanma.png',
+                  './img/start.png',
+                  './img/tree.png');
 	game_.onload = function(){
 		var createStartScene = function(){
 			var scene = new Scene();
@@ -22,7 +22,7 @@ window.onload = function() {
 			scene.addChild(title);
 
 			var startImage = new Sprite(320,160);
-			startImage.image =game_.assets['http://jsrun.it/assets/K/K/W/1/KKW1x.png'];
+			startImage.image =game_.assets['./img/start.png'];
 			startImage.x = 0;
 			startImage.y = 175;
 			startImage.scaleX =0.5;
@@ -37,26 +37,26 @@ window.onload = function() {
 			var scene = new Scene();
 			scene.backgroundColor='#f0e080';
 			var tree = new Sprite(200,200);
-			tree.image = game_.assets['http://jsrun.it/assets/u/F/l/T/uFlTJ.png'];
+			tree.image = game_.assets['./img/tree.png'];
 			tree.x=-320;
 			tree.y=100;
 			scene.addChild(tree);
 
 			var gauge2 = new Sprite(50,150);
-			gauge2.image = game_.assets['http://jsrun.it/assets/c/6/j/W/c6jWn.png'];
+			gauge2.image = game_.assets['./img/gauge2.png'];
 			gauge2.x=30;
 			gauge2.y=70;
 			scene.addChild(gauge2);
 
 			var gauge = new Sprite(30,30);
-			gauge.image = game_.assets['http://jsrun.it/assets/I/a/3/r/Ia3rl.png'];
+			gauge.image = game_.assets['./img/red.png'];
 			gauge.x=40;
 			gauge.y=200;
 			gauge.scaleY=0;
 			scene.addChild(gauge);
 
 			var sanma = new Sprite(200,54);
-			sanma.image = game_.assets['http://jsrun.it/assets/w/5/r/1/w5r1o.png'];
+			sanma.image = game_.assets['./img/sanma.png'];
 			sanma.x=120;
 			sanma.y=200;
 			sanma.scaleX =1;
@@ -64,25 +64,25 @@ window.onload = function() {
 			scene.addChild(sanma);
 
 			var glass = new Sprite(320,20);
-			glass.image = game_.assets['http://jsrun.it/assets/Q/G/q/U/QGqUE.png'];
+			glass.image = game_.assets['./img/glass.png'];
 			glass.x=0;
 			glass.y=300;
 			scene.addChild(glass);
 
 			var glass2 = new Sprite(320,20);
-			glass2.image = game_.assets['http://jsrun.it/assets/Q/G/q/U/QGqUE.png'];
+			glass2.image = game_.assets['./img/glass.png'];
 			glass2.x=-320;
 			glass2.y=300;
 			scene.addChild(glass2);
 
 			var glass3 = new Sprite(320,20);
-			glass3.image = game_.assets['http://jsrun.it/assets/Q/G/q/U/QGqUE.png'];
+			glass3.image = game_.assets['./img/glass.png'];
 			glass3.x=-160;
 			glass3.y=300;
 			scene.addChild(glass3);
 
 			var jack = new Sprite(100,100);
-			jack.image = game_.assets['http://jsrun.it/assets/S/q/Z/Z/SqZZt.png'];
+			jack.image = game_.assets['./img/jack.png'];
 			jack.x = -820;
 			jack.y = 100;
 			scene.addChild(jack);
@@ -111,19 +111,19 @@ window.onload = function() {
 			retry.y=10;
 			scene.addChild(retry);
 
-            var tweet = new Label('');//removed
+      var tweet = new Label('つぶやく');//removed
 			tweet.color='#00ffff';
 			tweet.x=1000;
 			tweet.y=1000;
 			tweet.font='15px sans-serif';
 			scene.addChild(tweet);
 
-			var rank =new Label();
-			rank.text="ランキング:取得中...";
-			rank.color='#a6126a';
-			rank.x=1000;
-			rank.y=1000;
-			scene.addChild(rank);
+			// var rank =new Label();
+			// // rank.text="ランキング:取得中...";
+			// rank.color='#a6126a';
+			// rank.x=1000;
+			// rank.y=1000;
+			// scene.addChild(rank);
 
 			var joutai = 0;
 			var oufuku=0;
@@ -137,31 +137,31 @@ window.onload = function() {
 
 			var total;
 
-			function RankingNowRec(json){
-				ThisRank=json.response.rank;
-				total=json.response.total;
-				rank.text="ランキング:"+json.response.rank + " / " + json.response.total;
-				if(joutai==3){
-        	tweet.x=210;
-        	tweet.y=165;
-				}
-			}
-			window.RankingNow = RankingNowRec;
-			function loadScript(src, callback) {
-  			var head = document.getElementsByTagName('head')[0];
-  			var script = document.createElement('script');
-   			script.src = src;
-  			head.appendChild(script);
- 				callback();
-			}
+			// function RankingNowRec(json){
+			// 	ThisRank=json.response.rank;
+			// 	total=json.response.total;
+			// 	rank.text="ランキング:"+json.response.rank + " / " + json.response.total;
+			// 	if(joutai==3){
+      //   	tweet.x=210;
+      //   	tweet.y=165;
+			// 	}
+			// }
+			// window.RankingNow = RankingNowRec;
+			// function loadScript(src, callback) {
+  		// 	var head = document.getElementsByTagName('head')[0];
+  		// 	var script = document.createElement('script');
+   		// 	script.src = src;
+  		// 	head.appendChild(script);
+ 			// 	callback();
+			// }
 			retry.addEventListener(Event.TOUCH_START,function(e){
 				game_.replaceScene(createGameScene());
 			});
 
       tweet.addEventListener(Event.TOUCH_START,function(e){
 				var locate = location.href;
-      	setTimeout(function() {window.open("http://twitter.com/home?status="+
-				encodeURIComponent("Score: " +Math.floor(length)+"\nランキング: "+ ThisRank + " / " + total+"\n#秋刀魚飛ばし\n"+locate)+" "); }, 10);
+      	setTimeout(function() {window.open("http://twitter.com/intent/tweet?text="+
+				encodeURIComponent("Score: " +Math.floor(length)+"\n#秋刀魚飛ばし\n"+locate)+" "); }, 10);
 			});
 
 			scene.addEventListener(Event.TOUCH_START,function(e){
@@ -275,16 +275,18 @@ window.onload = function() {
 						 	sanma.x+=40;
 						}
 						if(sanma.x>=70){
-							rank.text="ランキング:取得中...";
-							rank.x=40;
-							rank.y=150;
+							// rank.text="ランキング:取得中...";
+							// rank.x=40;
+							// rank.y=150;
 					 		score.textAlign = 'center';
 							score.x=0;
 					 		score.y=96;
 							score.font='40px sans-serif';
-              loadScript("https://script.google.com/macros/s/AKfycbxO6iJ5bmRfHvjUTCTCDDKO_loOsj-bKUP5rwfLs16k7AM-UYgF/exec?score=" + Math.floor(length) + "&callback=RankingNow", function() {
- 								console.log('script loaded');
-							});
+              // loadScript("https://script.google.com/macros/s/AKfycbxO6iJ5bmRfHvjUTCTCDDKO_loOsj-bKUP5rwfLs16k7AM-UYgF/exec?score=" + Math.floor(length) + "&callback=RankingNow", function() {
+ 							// 	console.log('script loaded');
+							// });
+							tweet.x=210;
+							tweet.y=165;
 							joutai=3;
   					}
 					}
