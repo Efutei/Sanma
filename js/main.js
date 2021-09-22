@@ -159,9 +159,13 @@ window.onload = function() {
 			});
 
       tweet.addEventListener(Event.TOUCH_START,function(e){
-				var locate = location.href;
-      	setTimeout(function() {window.open("http://twitter.com/intent/tweet?text="+
-				encodeURIComponent("Score: " +Math.floor(length)+"\n#秋刀魚飛ばし\n"+locate)+" "); }, 10);
+				setTimeout(function() {
+					var locate = location.href;
+					var tweetlink = "http://twitter.com/intent/tweet?text="+encodeURIComponent("Score: " +Math.floor(length)+"\n#秋刀魚飛ばし\n"+locate)+" ";
+					if(!window.open(tweetlink)) {
+						window.location.href = tweetlink;
+					}
+				}, 10);
 			});
 
 			scene.addEventListener(Event.TOUCH_START,function(e){
