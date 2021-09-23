@@ -118,12 +118,12 @@ window.onload = function() {
 			tweet.font='15px sans-serif';
 			scene.addChild(tweet);
 
-			// var rank =new Label();
-			// // rank.text="ランキング:取得中...";
-			// rank.color='#a6126a';
-			// rank.x=1000;
-			// rank.y=1000;
-			// scene.addChild(rank);
+			var rank =new Label();
+			// rank.text="ランキング:取得中...";
+			rank.color='#a6126a';
+			rank.x=1000;
+			rank.y=1000;
+			scene.addChild(rank);
 
 			var joutai = 0;
 			var oufuku=0;
@@ -137,23 +137,23 @@ window.onload = function() {
 
 			var total;
 
-			// function RankingNowRec(json){
-			// 	ThisRank=json.response.rank;
-			// 	total=json.response.total;
-			// 	rank.text="ランキング:"+json.response.rank + " / " + json.response.total;
-			// 	if(joutai==3){
-      //   	tweet.x=210;
-      //   	tweet.y=165;
-			// 	}
-			// }
-			// window.RankingNow = RankingNowRec;
-			// function loadScript(src, callback) {
-  		// 	var head = document.getElementsByTagName('head')[0];
-  		// 	var script = document.createElement('script');
-   		// 	script.src = src;
-  		// 	head.appendChild(script);
- 			// 	callback();
-			// }
+			function RankingNowRec(json){
+				ThisRank=json.response.rank;
+				total=json.response.total;
+				rank.text="ランキング:"+json.response.rank + " / " + json.response.total;
+				if(joutai==3){
+        	tweet.x=210;
+        	tweet.y=165;
+				}
+			}
+			window.RankingNow = RankingNowRec;
+			function loadScript(src, callback) {
+  			var head = document.getElementsByTagName('head')[0];
+  			var script = document.createElement('script');
+   			script.src = src;
+  			head.appendChild(script);
+ 				callback();
+			}
 			retry.addEventListener(Event.TOUCH_START,function(e){
 				game_.replaceScene(createGameScene());
 			});
@@ -161,7 +161,7 @@ window.onload = function() {
       tweet.addEventListener(Event.TOUCH_START,function(e){
 				setTimeout(function() {
 					var locate = location.href;
-					var tweetlink = "http://twitter.com/intent/tweet?text="+encodeURIComponent("Score: " +Math.floor(length)+"\n#秋刀魚飛ばし\n"+locate)+" ";
+					var tweetlink = "http://twitter.com/intent/tweet?text="+encodeURIComponent("Score: " +Math.floor(length)+"\nランキング: "+ ThisRank + " / " + total+"\n#秋刀魚飛ばし\n"+locate)+" \n";
 					if(!window.open(tweetlink)) {
 						window.location.href = tweetlink;
 					}
@@ -279,18 +279,19 @@ window.onload = function() {
 						 	sanma.x+=40;
 						}
 						if(sanma.x>=70){
-							// rank.text="ランキング:取得中...";
-							// rank.x=40;
-							// rank.y=150;
+							rank.text="ランキング:取得中...";
+							rank.x=40;
+							rank.y=150;
 					 		score.textAlign = 'center';
 							score.x=0;
 					 		score.y=96;
 							score.font='40px sans-serif';
-              // loadScript("https://script.google.com/macros/s/AKfycbxO6iJ5bmRfHvjUTCTCDDKO_loOsj-bKUP5rwfLs16k7AM-UYgF/exec?score=" + Math.floor(length) + "&callback=RankingNow", function() {
- 							// 	console.log('script loaded');
-							// });
-							tweet.x=210;
-							tweet.y=165;
+              loadScript("https://script.google.com/macros/s/AKfycbyFEaVwU5yn0uFWsO4tQl8YqJJDWYRLO_LkR5APaHKmVk4HyVlPHucahJSJ24mlBSMh/exec?score=" + Math.floor(length) + "&callback=RankingNow", function() {
+ 								console.log('script loaded');
+							});
+							// ランキングが壊れてた時のやつ
+							// tweet.x=210;
+							// tweet.y=165;
 							joutai=3;
   					}
 					}
